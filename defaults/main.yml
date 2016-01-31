@@ -1,0 +1,4 @@
+ansible_playbook_user: ansible
+ansible_playbook_group: admin
+users: []
+removed_users: []

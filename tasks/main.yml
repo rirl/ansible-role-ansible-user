@@ -1,0 +1,44 @@
+- name: "Create group for ansible user"
+  group:
+    name: '{{ ansible_playbook_group }}'
+  tags:
+    - ansible
+
+- name: "Create user processing ansible tasks"
+  user:
+    comment: User for processing ansible tasks
+    name: '{{ ansible_playbook_user }}'
+    group: '{{ ansible_playbook_group }}'
+    shell: '/bin/bash'
+    append: yes
+  tags:
+    - ansible
+
+- name: "Set sudo rights for ansible user"
+  template:
+    src: ansible-sudoers.j2
+    dest: '/etc/sudoers.d/{{ ansible_playbook_user }}-sudoers'
+    owner: root
+    group: root
+    mode: 0400
+  tags:
+    - ansible
+
+- name: "Authorize users to login as ansible user via ssh"
+  authorized_key:
+    user: '{{ ansible_playbook_user }}'
+    key: '{{ item.key }}'
+  with_items: "{{ users }}"
+  tags:
+    - ansible
+    - ssh
+
+- name: "Delete public key from authorized_keys"
+  authorized_key:
+    user: '{{ ansible_playbook_user }}'
+    key: '{{ item.key }}'
+    state: absent
+  with_items: "{{ removed_users }}"
+  tags:
+    - ssh
+    - userdel
