@@ -1,4 +1,10 @@
-ansible_playbook_user: ansible
-ansible_playbook_group: admin
-users: []
-removed_users: []
+ansible_playbook_user: "ansible"
+ansible_playbook_group: "ansible"
+
+ansible_users: []
+
+#
+# ansible_users:
+#   - name: john
+#     key: "{{ lookup('file', 'files/public_keys/john.pub') }}"
+#     state: present

@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Alexey Osipenko
-  description: creates user for running playbooks
+  description: Create a user for running playbooks
   company: Cimon.io
   license: MIT
   min_ansible_version: 2.0.0
@@ -13,6 +13,7 @@ galaxy_info:
       versions:
       - all
 
-  galaxy_tags: []
+  galaxy_tags:
+    - ansible-user
 
 dependencies: []
