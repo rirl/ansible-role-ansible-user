@@ -13,7 +13,6 @@ galaxy_info:
       versions:
       - all
 
-  galaxy_tags:
-    - ansible-user
+  galaxy_tags: []
 
 dependencies: []
